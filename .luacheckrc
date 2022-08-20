@@ -30,6 +30,7 @@ stds.github_didiermalenfant_pdbase = {
             -- to make the entire 'table' global read-write in other pdbase files.
             read_only = true,
             fields = {
+                count = {},
                 random = {},
                 each = {},
                 newAutotable = {},

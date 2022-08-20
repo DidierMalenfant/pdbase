@@ -4,8 +4,20 @@
 
 table = table or {}
 
+function table.count(t)
+    local count = 0
+    
+    for _ in pairs(t) do
+        count += 1
+    end
+    
+    return count
+end
+
 function table.random(t)
-    if type(t) ~= 'table' then return nil end
+    if type(t) ~= 'table' then
+        return nil
+    end
 
     return t[math.ceil(math.random(#t))]
 end

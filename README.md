@@ -76,6 +76,10 @@ Returns -1 if `v` is negative and 1 otherwise.
 
 The `table` module extends the **Playdate SDK** with some extra functions. Some code in this module is based on code originally written by [Nic Magnier](https://twitter.com/NicMagnier) and [Matt Sephton](https://twitter.com/gingerbeardman).
 
+##### `table.count(t)`
+
+Returns the number of elements in table `t`. Unlike `#`, this works whether the table is ordered or not.
+
 ##### `table.random(t)`
 
 Returns a random element from table `t`.
