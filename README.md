@@ -168,4 +168,4 @@ Print debug log message to the console. This macro is also disabled unless `PDBA
 
 ## License
 
-`pdbase` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+**pdbase** is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
