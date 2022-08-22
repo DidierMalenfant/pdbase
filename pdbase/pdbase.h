@@ -15,6 +15,10 @@ extern PlaydateAPI* pd;
     #define PDBASE_ALLOC(size)           pd->system->realloc(NULL, (size))
 #endif
 
+#ifndef PDBASE_REALLOC
+    #define PDBASE_REALLOC(mem, size)    pd->system->realloc((mem), (size))
+#endif
+
 #ifndef PDBASE_FREE
     #define PDBASE_FREE(mem)             pd->system->realloc((mem), 0)
 #endif
