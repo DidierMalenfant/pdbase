@@ -1,6 +1,6 @@
 # pdbase for Playdate
 
-![](https://img.shields.io/github/license/DidierMalenfant/pdbase) ![](https://img.shields.io/badge/Lua-5.4-yellowgreen) ![](https://img.shields.io/badge/toybox.py-compatible-brightgreen) ![](https://img.shields.io/github/v/tag/DidierMalenfant/pdbase)
+[![MIT License](https://img.shields.io/github/license/DidierMalenfant/pdbase)](https://spdx.org/licenses/MIT.html) [![Lua Version](https://img.shields.io/badge/Lua-5.4-yellowgreen)](https://lua.org) [![Toybox Compatible](https://img.shields.io/badge/toybox.py-compatible-brightgreen)](https://toyboxpy.io) [![Latest Version](https://img.shields.io/github/v/tag/DidierMalenfant/pdbase)](https://github.com/DidierMalenfant/pdbase/tags)
 
 **pdbase** is a [**Playdate**](https://play.date) **toybox** which provides handy utility functions and SDK additions.
 
