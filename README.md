@@ -10,7 +10,13 @@ You can add it to your **Playdate** project by installing [**toybox.py**](https:
 toybox add DidierMalenfant/pdbase
 ```
 
-This **toybox** contains both **Lua** and **C** toys for you to play with.
+Then, if your code is in the `source` folder, just import the following:
+
+```lua
+import '../toyboxes/toyboxes.lua'
+```
+
+This **toybox** contains both **Lua** and **C** toys for you to play with. If you want to also use the **C** toys, you will have to also add `toyboxes/toybox.mk` to your makefile.
 
 ---
 
