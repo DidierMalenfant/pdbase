@@ -64,6 +64,7 @@ stds.github_didiermalenfant_pdbase_table = {
                 random = {},
                 each = {},
                 newAutotable = {},
+                filter = {},
             }
         },
     }
