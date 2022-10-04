@@ -143,6 +143,36 @@ layers = enum({
 sprite:setZIndex(layer.player)
 ```
 
+### Sampler (Lua)
+
+Graphs samples collected/frame against a specified sample duration. Originally written by [Dustin Mierau](https://twitter.com/dmierau).
+
+```
+local mem_sampler = pdbase.Sampler(100, function()
+   return collectgarbage("count")
+end)
+
+function playdate.update()
+   mem_sampler:draw(10, 10, 50, 30)
+end
+```
+
+##### `pdbase.debug.Sampler(sample_period, sampler_fn)`
+
+Creates a new sampler object given a `sample_period` in milliseconds and and function whitch should return an integer.
+
+##### `pdbase.debug.Sampler:reset()`
+
+Reset the sampler.
+
+##### `pdbase.debug.Sampler:print()`
+
+Print the current sampler date to the console.
+
+##### `pdbase.debug.Sampler:draw(x, y, width, height)`
+
+Draw the sample data at `x`, `y` with a size of `width` and `height`. This needs to be called from your `playdate.update()` method.
+
 ### Globals (C)
 
 ##### `PlaydateAPI* pd`
