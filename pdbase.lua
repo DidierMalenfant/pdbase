@@ -2,6 +2,7 @@
 --
 -- SPDX-License-Identifier: MIT
 
+import "debug"
 import "math"
 import "filepath"
 import "table"

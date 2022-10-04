@@ -173,6 +173,20 @@ Print the current sampler date to the console.
 
 Draw the sample data at `x`, `y` with a size of `width` and `height`. This needs to be called from your `playdate.update()` method.
 
+### debug (Lua)
+
+##### `pdbase.debug.drawText(text, x, y, duration)`
+
+Draw a the `text` on the screen at `x`, `y` coordinates. If `duration` is specified then this will automatically stay on the screen for that number of frames.
+
+This method will backup and restore any graphic states it uses to draw the text, therefore can be used anywhere in your code without disrupting your project. It uses the current font and clears the background with a rectangle before drawing the text to make sure it it legible. Definitely not something to use in production code.
+
+Note: If you use the `duration` argument, you will need to make sure your `update()` methods calls `playdate.frameTimer.updateTimers()`.
+
+##### `pdbase.debug.setTextBackgroundColor(color)`
+
+Set the background color used to clear the background behind debug text to `color`.
+
 ### Globals (C)
 
 ##### `PlaydateAPI* pd`
