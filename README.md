@@ -111,6 +111,17 @@ print(at[0][1][3][3]) -- error, because only 3 dimensions set
 
 Taken from https://stackoverflow.com/a/21287623/28290
 
+##### `table.filter(t, filterFunction)`
+
+Filters the table `t` by applying the filter function `filterFunction`.
+
+```
+local table = [ 1, 2, 3, 4, 5]
+local result = table.filter(100, function(value)
+   return value < 3
+end)
+```
+
 ### utils (Lua)
 
 The `utils` module extends the **Playdate SDK** with some extra functions. Some code in this module is based on code originally written by [Nic Magnier](https://twitter.com/NicMagnier).
