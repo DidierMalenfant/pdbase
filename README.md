@@ -181,7 +181,7 @@ Draw a the `text` on the screen at `x`, `y` coordinates. If `duration` is specif
 
 This method will backup and restore any graphic states it uses to draw the text, therefore can be used anywhere in your code without disrupting your project. It uses the current font and clears the background with a rectangle before drawing the text to make sure it it legible. Definitely not something to use in production code.
 
-Note: If you use the `duration` argument, you will need to make sure your `update()` methods calls `playdate.frameTimer.updateTimers()`.
+This function depends on **Plupdate**. Make sure you [read about](https://github.com/DidierMalenfant/Plupdate#changes-in-your-code) what this means for your code and its `playdate.update()` callback.
 
 ##### `pdbase.debug.setTextBackgroundColor(color)`
 

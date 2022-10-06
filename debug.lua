@@ -3,48 +3,75 @@
 -- SPDX-License-Identifier: MIT
 
 import "CoreLibs/graphics"
-import "CoreLibs/frameTimer"
+import "CoreLibs/object"
 
 pdbase = pdbase or {}
 pdbase.debug = pdbase.debug or {}
 
 local gfx <const> = playdate.graphics
 
-local textBackgroundColor = gfx.kColorWhite
+class('DebugText', { text, x, y, duration }, pdbase.debug).extends()
 
-local drawTextFunc = function(text, x, y)
-    -- Save current state.
-    local doff_x, doff_y = gfx.getDrawOffset()
-    gfx.setDrawOffset(0, 0)
+function pdbase.debug.DebugText:init(text, x, y, duration)
+    self.text = text
+    self.x = x
+    self.y = y
+    self.duration = duration
+end
+
+local text_background_color = gfx.kColorWhite
+local debug_texts = { }
+local debug_text_was_init = false
+
+function pdbase.debug.init()
+    if debug_text_was_init == true then
+        return
+    end
+
+    Plupdate.addPostCallback(function()
+        local debug_texts_to_delete = { }
     
-    local color = gfx.getColor()
-    gfx.setColor(textBackgroundColor)
+        for i, debug_text in ipairs(debug_texts) do
+            -- Save current state.
+            gfx.pushContext()
+
+            gfx.setDrawOffset(0, 0)
+            gfx.setColor(text_background_color)
+            gfx.setImageDrawMode(gfx.kDrawModeCopy)    
+            
+            -- Draw the text.
+            local width, height = gfx.getTextSize(debug_text.text)
+            gfx.fillRect(debug_text.x, debug_text.y, width, height)
+            gfx.drawText(debug_text.text, debug_text.x, debug_text.y)
+            
+            -- Restore all the things we modified.
+            gfx.popContext()
+            
+            debug_text.duration -= 1
+            
+            if debug_text.duration == 0 then
+                table.insert(debug_texts_to_delete, i)
+            end
+        end
+        
+        for i, index_to_remove in ipairs(debug_texts_to_delete) do
+            table.remove(debug_texts, index_to_remove - i + 1)
+        end
+    end)
     
-    local dmode = gfx.getImageDrawMode()    
-    gfx.setImageDrawMode(gfx.kDrawModeCopy)    
-    
-    -- Draw the text.
-    local width, height = gfx.getTextSize(text)
-    gfx.fillRect(x, y, width, height)
-    gfx.drawText(text, x, y)
-    
-    -- Restore all the things we modified.
-    gfx.setDrawOffset(doff_x, doff_y)
-    gfx.setColor(color)
-    gfx.setImageDrawMode(dmode)        
+    debug_text_was_init = true
 end
 
 function pdbase.debug.drawText(text, x, y, duration)
-    if duration ~= nil then
-        local timer = playdate.frameTimer.new(duration)
-        timer.updateCallback = function(timer)
-            drawTextFunc(text, x, y)
-        end
-    else
-        drawTextFunc(text, x, y)
+    pdbase.debug.init()
+
+    if duration == nil then
+        duration = 1
     end
+    
+    table.insert(debug_texts, pdbase.debug.DebugText(text, x, y, duration))
 end
 
-function pdbase.debug.setTextBackgroundColor(color)
-    textBackgroundColor = color
+function pdbase.debug.settext_background_color(color)
+    text_background_color = color
 end
