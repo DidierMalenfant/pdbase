@@ -72,6 +72,6 @@ function pdbase.debug.drawText(text, x, y, duration)
     table.insert(debug_texts, pdbase.debug.DebugText(text, x, y, duration))
 end
 
-function pdbase.debug.settext_background_color(color)
+function pdbase.debug.set_text_background_color(color)
     text_background_color = color
 end
