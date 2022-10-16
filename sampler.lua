@@ -42,7 +42,7 @@ function pdbase.Sampler:print()
 
     local current_sample_avg = 0
     for _, v in ipairs(self.samples) do
-        current_sample_avg += v
+        current_sample_avg = current_sample_avg + v
     end
     current_sample_avg /= #self.samples
     print('Average: '..current_sample_avg)
@@ -75,7 +75,7 @@ function pdbase.Sampler:draw(x, y, width, height)
         if #self.current_sample > 0 then
             local current_sample_avg = 0
             for _, v in ipairs(self.current_sample) do
-                current_sample_avg += v
+                current_sample_avg = current_sample_avg + v
             end
             current_sample_avg /= #self.current_sample
             self.high_watermark = math.max(self.high_watermark, current_sample_avg)

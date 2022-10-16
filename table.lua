@@ -6,11 +6,11 @@ table = table or {}
 
 function table.count(t)
     local count = 0
-    
+
     for _ in pairs(t) do
         count += 1
     end
-    
+
     return count
 end
 
@@ -57,4 +57,3 @@ function table.filter(t, filterFunction)
 
     return out
 end
-  
