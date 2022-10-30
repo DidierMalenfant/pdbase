@@ -27,7 +27,6 @@ return {
                                 init = {}
                             }
                         },
-                        init = {},
                         drawText = {},
                         set_text_background_color = {},
                         memoryCheck = {}

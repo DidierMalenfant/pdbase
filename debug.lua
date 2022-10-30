@@ -24,6 +24,8 @@ end
 local text_background_color = gfx.kColorWhite
 local debug_texts = { }
 local debug_text_was_init = false
+local memoryInit = 0
+local memoryUsed = 0
 
 local function text_init()
     if debug_text_was_init == true then
@@ -76,4 +78,31 @@ end
 
 function debug.set_text_background_color(color)
     text_background_color = color
+end
+
+function debug.memoryCheck(prefix)
+    if memoryInit == 0 then
+        -- If this is the first time calling this, we just init the module.
+        memoryInit = collectgarbage("count")*1024
+        memoryUsed = memoryInit
+
+        print(string.format("MemoryCheck: initial memory usage (%d bytes)", memoryInit))
+
+        return
+    end
+
+    local new <const> = collectgarbage("count") * 1024
+    local diff <const> = new - memoryUsed
+
+    prefix = prefix or 'MemoryCheck'
+
+    if diff > 0 then
+        print(string.format("%s: memory alloc\t+%dKB total %dKB (%dKB since start)",
+                            prefix, diff // 1024, new // 1024, (new - memoryInit) // 1024))
+    elseif diff < 0 then
+        print(string.format("%s: memory free\t%dKB total %dKB (%dKB since start)",
+                            prefix, diff // 1024, new // 1024, (new - memoryInit) // 1024))
+    end
+
+    memoryUsed = new
 end

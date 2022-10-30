@@ -187,6 +187,10 @@ This function depends on **Plupdate**. Make sure you [read about](https://github
 
 Set the background color used to clear the background behind debug text to `color`.
 
+##### `dm.debug.memoryCheck(prefix)`
+
+First time this is called, it records the current memory situation and prints this information to the console. Subsequent times will display the change since that first call. Can be used for tracking memory leaks and usage. If `prefix` is provided then this is used in the message looged to the console (can be used to identify separate calls in your code).
+
 ### Globals (C)
 
 ##### `PlaydateAPI* pd`
@@ -194,6 +198,8 @@ Set the background color used to clear the background behind debug text to `colo
 Shortcut used to call Playdate API methods (for example `pd->system->logToConsole()`).
 
 ### Memory Allocation (C)
+
+Some code in this module is based on code originally written by [Matt Sephton](https://twitter.com/gingerbeardman).
 
 ##### `void* dmMemoryAlloc(size_t nb_of_items, size_t item_size)`
 
