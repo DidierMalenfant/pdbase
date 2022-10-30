@@ -5,26 +5,27 @@
 import "CoreLibs/graphics"
 import "CoreLibs/object"
 
-local gfx = playdate.graphics
-
-pdbase = pdbase or {}
+dm = dm or {}
 
 -- Graphs samples collected/frame against a specified sample duration
-class('Sampler', { }, pdbase).extends()
+class('Sampler', { }, dm).extends()
 
-function pdbase.Sampler.new(...)
-    return pdbase.Sampler(...)
+local Sampler <const> = dm.Sampler
+local gfx <const> = playdate.graphics
+
+function Sampler.new(...)
+    return Sampler(...)
 end
 
-function pdbase.Sampler:init(sample_period, sampler_fn)
-    pdbase.Sampler.super.init(self)
+function Sampler:init(sample_period, sampler_fn)
+    Sampler.super.init(self)
 
     self.sample_period = sample_period
     self.sampler_fn = sampler_fn
     self:reset()
 end
 
-function pdbase.Sampler:reset()
+function Sampler:reset()
     self.last_sample_time = nil
     self.samples = {}
     self.current_sample = {}
@@ -32,7 +33,7 @@ function pdbase.Sampler:reset()
     self.high_watermark = 0
 end
 
-function pdbase.Sampler:print()
+function Sampler:print()
     print('')
 
     print('Sampler Info')
@@ -55,7 +56,7 @@ function pdbase.Sampler:print()
     print('')
 end
 
-function pdbase.Sampler:draw(x, y, width, height)
+function Sampler:draw(x, y, width, height)
     local time_delta = 0
     local current_time <const> = playdate.getCurrentTimeMilliseconds()
     local graph_padding <const> = 1

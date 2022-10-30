@@ -10,9 +10,9 @@
 
 return {
     globals = {
-        enum = {},
-        pdbase = {
+        dm = {
             fields = {
+                enum = {},
                 debug = {
                     fields = {
                         DebugText = {
@@ -29,7 +29,8 @@ return {
                         },
                         init = {},
                         drawText = {},
-                        set_text_background_color = {}
+                        set_text_background_color = {},
+                        memoryCheck = {}
                     }
                 },
                 filepath = {
@@ -56,26 +57,27 @@ return {
                         print = {},
                         draw = {}
                     }
+                },
+                math = {
+                    fields = {
+                        clamp = {},
+                        ring = {},
+                        ring_int = {},
+                        approach = {},
+                        infinite_approach = {},
+                        round = {},
+                        sign = {}
+                    }
+                },
+                table = {
+                    fields = {
+                        count = {},
+                        random = {},
+                        each = {},
+                        newAutotable = {},
+                        filter = {}
+                    }
                 }
-            }
-        },
-        math = {
-            fields = {
-                clamp = {},
-                ring = {},
-                ring_int = {},
-                approach = {},
-                infinite_approach = {},
-                round = {},
-                sign = {},
-            }
-        },
-        table = {
-            fields = {
-                count = {},
-                random = {},
-                each = {},
-                newAutotable = {},
             }
         }
     }

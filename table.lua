@@ -2,7 +2,10 @@
 --
 -- SPDX-License-Identifier: MIT
 
-table = table or {}
+dm = dm or {}
+dm.table = dm.table or {}
+
+local table <const> = dm.table
 
 function table.count(t)
     local count = 0

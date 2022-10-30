@@ -2,7 +2,10 @@
 --
 -- SPDX-License-Identifier: MIT
 
-math = math or {}
+dm = dm or {}
+dm.math = dm.math or {}
+
+local math <const> = dm.math
 
 function math.clamp(a, min, max)
     if min > max then

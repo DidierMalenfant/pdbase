@@ -5,14 +5,16 @@
 import "CoreLibs/graphics"
 import "CoreLibs/object"
 
-pdbase = pdbase or {}
-pdbase.debug = pdbase.debug or {}
+dm = dm or {}
+dm.debug = dm.debug or {}
 
+local debug <const> = dm.debug
+local Plupdate <const> = dm.Plupdate
 local gfx <const> = playdate.graphics
 
-class('DebugText', { }, pdbase.debug).extends()
+class('DebugText', { }, debug).extends()
 
-function pdbase.debug.DebugText:init(text, x, y, duration)
+function debug.DebugText:init(text, x, y, duration)
     self.text = text
     self.x = x
     self.y = y
@@ -21,10 +23,10 @@ end
 
 local text_background_color = gfx.kColorWhite
 local debug_texts = { }
-local debug_text_was_init = false
+local debug_was_init = false
 
-function pdbase.debug.init()
-    if debug_text_was_init == true then
+function debug.init()
+    if debug_was_init == true then
         return
     end
 
@@ -59,19 +61,19 @@ function pdbase.debug.init()
         end
     end)
 
-    debug_text_was_init = true
+    debug_was_init = true
 end
 
-function pdbase.debug.drawText(text, x, y, duration)
-    pdbase.debug.init()
+function debug.drawText(text, x, y, duration)
+    debug.init()
 
     if duration == nil then
         duration = 1
     end
 
-    table.insert(debug_texts, pdbase.debug.DebugText(text, x, y, duration))
+    table.insert(debug_texts, debug.DebugText(text, x, y, duration))
 end
 
-function pdbase.debug.set_text_background_color(color)
+function debug.set_text_background_color(color)
     text_background_color = color
 end

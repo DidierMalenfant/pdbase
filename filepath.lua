@@ -2,10 +2,12 @@
 --
 -- SPDX-License-Identifier: MIT
 
-pdbase = pdbase or {}
-pdbase.filepath= pdbase.filepath or {}
+dm = dm or {}
+dm.filepath = dm.filepath or {}
 
-function pdbase.filepath.filename(path)
+local filepath <const> = dm.filepath
+
+function filepath.filename(path)
     local path_length = #path
 
     for i = path_length, 1, -1 do
@@ -21,7 +23,7 @@ function pdbase.filepath.filename(path)
     return path
 end
 
-function pdbase.filepath.extension(path)
+function filepath.extension(path)
     local path_length = #path
 
     for i = path_length, 1, -1 do
@@ -42,7 +44,7 @@ function pdbase.filepath.extension(path)
     return nil
 end
 
-function pdbase.filepath.directory(path)
+function filepath.directory(path)
     local path_length = #path
 
     for i = path_length, 1, -1 do
@@ -54,8 +56,8 @@ function pdbase.filepath.directory(path)
     return nil
 end
 
-function pdbase.filepath.basename(path)
-    local filename = pdbase.filepath.filename(path)
+function filepath.basename(path)
+    local filename = filepath.filename(path)
     if filename ~= nil then
         local filename_length = #path
 
@@ -69,6 +71,6 @@ function pdbase.filepath.basename(path)
     return filename
 end
 
-function pdbase.filepath.join(path1, path2)
+function filepath.join(path1, path2)
     return path1 .. '/' .. path2
 end

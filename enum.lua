@@ -2,7 +2,9 @@
 --
 -- SPDX-License-Identifier: MIT
 
-function enum( t )
+dm = dm or {}
+
+function dm.enum(t)
     local result = {}
 
     for index, name in pairs(t) do

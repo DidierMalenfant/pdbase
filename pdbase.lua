@@ -3,8 +3,8 @@
 -- SPDX-License-Identifier: MIT
 
 import "debug"
-import "math"
+import "enum"
 import "filepath"
-import "table"
-import "utils"
+import "math"
 import "sampler"
+import "table"
