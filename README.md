@@ -219,6 +219,44 @@ Copies `nb_of_items` from the `src_index` item of size `item_size` starting at `
 
 Moves `nb_of_items` from the `src_index` item of size `item_size` starting at `src` to the `dest_index` item starting at dest.
 
+### List (C)
+
+##### `dmList* dmListCreate(size_t item_size)`
+
+Create a list of items with each a size of `item_size`. Returns a pointer to the new list or NULL if failed.
+
+##### `void dmListFree(dmList* list)`
+
+Free `list`.
+
+##### `void dmListRemoveAllItems(dmList* list)`
+
+Remove all items from `list`.
+
+##### `void* dmListGetItem(dmList* list, int i)`
+
+Get item at index `i` from `list`.
+
+##### `void dmListAppendItem(dmList* list, void* item)`
+
+Append `item` to `list`,
+
+##### `void dmListRemoveItemAt(dmList* list, int i)`
+
+Remove item at index `i` from `list`.
+
+##### `void* dmListFindItem(dmList* list, int (*find_function)(void* item, int i))`
+
+Finds item in `list` by using the provided `find_function`. `find_function` should return 1 if found, 0 otherwise. Returns the item if found or NULL otherwise.
+
+##### `int dmListIndexOfItem(dmList* list, void* item)`
+
+Returns the index of `item` in `list` found, otherwise return -1.
+
+##### `void dmListRemoveItem(dmList* list, void* item)`
+
+Remove `item`, if found, from `list`.
+
 ### Debugging (C)
 
 ##### `DM_LOG(format)`

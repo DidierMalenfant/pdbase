@@ -13,4 +13,5 @@ UINCDIR := $(call uniq, $(UINCDIR) $(_RELATIVE_DIR))
 # -- Add our source files.
 SRC := $(SRC) \
        $(_RELATIVE_DIR)/pdbase/pdbase.c \
-       $(_RELATIVE_DIR)/pdbase/memory.c
+       $(_RELATIVE_DIR)/pdbase/memory.c \
+       $(_RELATIVE_DIR)/pdbase/list.c

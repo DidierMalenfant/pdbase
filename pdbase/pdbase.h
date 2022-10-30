@@ -5,6 +5,7 @@
 #ifndef DM_PDBASE_H
 #define DM_PDBASE_H
 
+#include "pdbase/list.h"
 #include "pdbase/memory.h"
 
 #include "pd_api.h"
