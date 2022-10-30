@@ -23,10 +23,10 @@ end
 
 local text_background_color = gfx.kColorWhite
 local debug_texts = { }
-local debug_was_init = false
+local debug_text_was_init = false
 
-function debug.init()
-    if debug_was_init == true then
+local function text_init()
+    if debug_text_was_init == true then
         return
     end
 
@@ -61,11 +61,11 @@ function debug.init()
         end
     end)
 
-    debug_was_init = true
+    debug_text_was_init = true
 end
 
 function debug.drawText(text, x, y, duration)
-    debug.init()
+    text_init()
 
     if duration == nil then
         duration = 1
