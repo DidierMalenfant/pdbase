@@ -211,6 +211,14 @@ Reallocates memory at `mem` for `nb_of_items` of the given `item_size` each. Ret
 
 Free memory at `mem`.
 
+##### `void* dmMemoryCopy(void* src, size_t src_index, void* dest, size_t dest_index, size_t nb_of_items, size_t item_size)`
+
+Copies `nb_of_items` from the `src_index` item of size `item_size` starting at `src` to the `dest_index` item starting at dest. Source and destination **cannot** overlap.
+
+##### `void* dmMemoryMove(void* src, size_t src_index, void* dest, size_t dest_index, size_t nb_of_items, size_t item_size)`
+
+Moves `nb_of_items` from the `src_index` item of size `item_size` starting at `src` to the `dest_index` item starting at dest.
+
 ### Debugging (C)
 
 ##### `DM_LOG(format)`
