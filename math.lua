@@ -5,9 +5,7 @@
 dm = dm or {}
 dm.math = dm.math or {}
 
-local math <const> = dm.math
-
-function math.clamp(a, min, max)
+function dm.math.clamp(a, min, max)
     if min > max then
         min, max = max, min
     end
@@ -15,7 +13,7 @@ function math.clamp(a, min, max)
     return math.max(min, math.min(max, a))
 end
 
-function math.ring(a, min, max)
+function dm.math.ring(a, min, max)
     if min > max then
         min, max = max, min
     end
@@ -23,11 +21,11 @@ function math.ring(a, min, max)
     return min + (a-min)%(max-min)
 end
 
-function math.ring_int(a, min, max)
-    return math.ring(a, min, max+1)
+function dm.math.ring_int(a, min, max)
+    return dm.math.ring(a, min, max+1)
 end
 
-function math.approach(value, target, step)
+function dm.math.approach(value, target, step)
     if value==target then
         return value, true
     end
@@ -52,11 +50,11 @@ function math.approach(value, target, step)
     end
 end
 
-function math.infinite_approach(at_zero, at_infinite, x_halfway, x)
+function dm.math.infinite_approach(at_zero, at_infinite, x_halfway, x)
     return at_infinite - (at_infinite-at_zero)*0.5^(x/x_halfway)
 end
 
-function math.round(v, bracket)
+function dm.math.round(v, bracket)
     bracket = bracket or 1
 
     -- path for additional precision
@@ -71,6 +69,6 @@ function math.round(v, bracket)
     return ((v + half) // bracket) * bracket
 end
 
-function math.sign(v)
+function dm.math.sign(v)
     return (v >= 0 and 1) or -1
 end
