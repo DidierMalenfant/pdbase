@@ -33,27 +33,45 @@ function Sampler:reset()
     self.high_watermark = 0
 end
 
-function Sampler:print()
-    print('')
+function Sampler:print(prefix, display_log)
+    if display_log == nil then
+        display_log = false
+    end
 
-    print('Sampler Info')
-    print('=================')
+    if prefix ~= nil then
+        print(prefix)
+    end
+
     print('Now: '..self.samples[#self.samples])
     print('High Watermark: '..self.high_watermark)
+    print('Average: '..self:currentAverage())
 
+    if display_log == true then
+        print('Log:')
+        for _, v in ipairs(self.samples) do
+            print('\t'..v)
+        end
+    end
+end
+
+function Sampler:addValue(value)
+    assert(self.sampler_fn == nil, 'Sample: Should not manually add values if a smapling function was provided.')
+
+    self.high_watermark = math.max(self.high_watermark, value)
+    self.samples[#self.samples + 1] = value
+end
+
+function Sampler:currentHighWatermark()
+    return self.high_watermark
+end
+
+function Sampler:currentAverage()
     local current_sample_avg = 0
     for _, v in ipairs(self.samples) do
         current_sample_avg = current_sample_avg + v
     end
     current_sample_avg /= #self.samples
-    print('Average: '..current_sample_avg)
-
-    print('Log:')
-    for _, v in ipairs(self.samples) do
-        print('\t'..v)
-    end
-
-    print('')
+    return current_sample_avg
 end
 
 function Sampler:draw(x, y, width, height)
@@ -63,29 +81,28 @@ function Sampler:draw(x, y, width, height)
     local draw_height <const> = height - (graph_padding * 2)
     local draw_width <const> = width - (graph_padding * 2)
 
-    if self.last_sample_time then
-        time_delta = (current_time - self.last_sample_time)
-    end
-    self.last_sample_time = current_time
-
-    self.current_sample_time += time_delta
-    if self.current_sample_time < self.sample_period then
-        self.current_sample[#self.current_sample + 1] = self.sampler_fn()
-    else
-        self.current_sample_time = 0
-        if #self.current_sample > 0 then
-            local current_sample_avg = 0
-            for _, v in ipairs(self.current_sample) do
-                current_sample_avg = current_sample_avg + v
-            end
-            current_sample_avg /= #self.current_sample
-            self.high_watermark = math.max(self.high_watermark, current_sample_avg)
-            if #self.samples == draw_width then
-                table.remove(self.samples, 1)
-            end
-            self.samples[#self.samples + 1] = current_sample_avg
+    if self.sampler_fn ~= nil then
+        if self.last_sample_time then
+            time_delta = (current_time - self.last_sample_time)
         end
-        self.current_sample = {}
+        self.last_sample_time = current_time
+
+        self.current_sample_time += time_delta
+        if self.current_sample_time < self.sample_period then
+            self.current_sample[#self.current_sample + 1] = self.sampler_fn()
+        else
+            self.current_sample_time = 0
+            if #self.current_sample > 0 then
+                local current_sample_avg = self.currentAverage()
+                self.high_watermark = math.max(self.high_watermark, current_sample_avg)
+                self.samples[#self.samples + 1] = current_sample_avg
+            end
+            self.current_sample = {}
+        end
+    end
+
+    while #self.samples == draw_width do
+        table.remove(self.samples, 1)
     end
 
     -- Render graph

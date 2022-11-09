@@ -159,15 +159,27 @@ end
 
 ##### `dm.Sampler(sample_period, sampler_fn)`
 
-Creates a new sampler object given a `sample_period` in milliseconds and and function whitch should return an integer.
+Creates a new sampler object given a `sample_period` in milliseconds and and function whitch should return an integer. If `sample_period` and `sampler_fn` are omitted then this turns into a manual sampler that you need to feed using the `Sampler:setValue()` method.
+
+##### `dm.Sampler:addValue(value)`
+
+Manually add a value to the sampler. This can only be called if the sampler was created without a sample function.
 
 ##### `dm.Sampler:reset()`
 
 Reset the sampler.
 
-##### `dm.Sampler:print()`
+##### `dm.Sampler:print(prefix, display_log)`
 
-Print the current sampler date to the console.
+Print the current sampler data to the console. If `prefix` is provided then this string is printed before the data. If `display_log` is true then the log of all the sample data is also printed.
+
+##### `dm.Sampler:currentHighWatermark()`
+
+Returns the current high watermark from the sampled values.
+
+##### `dm.function Sampler:currentAverage()`
+
+Returns the current avererage value from the sampled values.
 
 ##### `dm.Sampler:draw(x, y, width, height)`
 

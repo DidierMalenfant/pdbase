@@ -54,6 +54,9 @@ return {
                         init = {},
                         reset = {},
                         print = {},
+                        addValue = {},
+                        currentHighWatermark = {},
+                        currentAverage = {},
                         draw = {}
                     }
                 },
