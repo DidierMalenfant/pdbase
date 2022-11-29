@@ -54,7 +54,9 @@ return {
                         init = {},
                         reset = {},
                         print = {},
+                        setMaxNbOfSamples = {},
                         addValue = {},
+                        pruneSamples = {},
                         currentHighWatermark = {},
                         currentAverage = {},
                         draw = {}

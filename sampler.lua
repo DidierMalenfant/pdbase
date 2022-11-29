@@ -22,6 +22,8 @@ function Sampler:init(sample_period, sampler_fn)
 
     self.sample_period = sample_period
     self.sampler_fn = sampler_fn
+    self.max_nb_of_samples = 30
+
     self:reset()
 end
 
@@ -54,11 +56,27 @@ function Sampler:print(prefix, display_log)
     end
 end
 
+function Sampler:setMaxNbOfSamples(nb_of_samples)
+    self.max_nb_of_samples = nb_of_samples
+end
+
 function Sampler:addValue(value)
     assert(self.sampler_fn == nil, 'Sample: Should not manually add values if a smapling function was provided.')
 
     self.high_watermark = math.max(self.high_watermark, value)
     self.samples[#self.samples + 1] = value
+
+    self:pruneSamples()
+end
+
+function Sampler:pruneSamples(nb_of_samples)
+    if nb_of_samples ~= nil then
+        self.max_nb_of_samples = math.max(nb_of_samples, self.max_samples)
+    end
+
+    while #self.samples == self.max_nb_of_samples do
+        table.remove(self.samples, 1)
+    end
 end
 
 function Sampler:currentHighWatermark()
@@ -67,10 +85,13 @@ end
 
 function Sampler:currentAverage()
     local current_sample_avg = 0
+
     for _, v in ipairs(self.samples) do
         current_sample_avg = current_sample_avg + v
     end
+
     current_sample_avg /= #self.samples
+
     return current_sample_avg
 end
 
@@ -92,17 +113,17 @@ function Sampler:draw(x, y, width, height)
             self.current_sample[#self.current_sample + 1] = self.sampler_fn()
         else
             self.current_sample_time = 0
+
             if #self.current_sample > 0 then
                 local current_sample_avg = self.currentAverage()
                 self.high_watermark = math.max(self.high_watermark, current_sample_avg)
                 self.samples[#self.samples + 1] = current_sample_avg
             end
+
             self.current_sample = {}
         end
-    end
 
-    while #self.samples == draw_width do
-        table.remove(self.samples, 1)
+        self:pruneSamples(draw_width)
     end
 
     -- Render graph
